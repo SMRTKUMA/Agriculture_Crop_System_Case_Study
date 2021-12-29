@@ -1,0 +1,26 @@
+server:
+   port: 9100
+   
+   
+   
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: cropDetails              #RouteIdentifier
+        uri: http://localhost:9000/         #Respective microservice URL which needs to be mapped
+         #Request Context Path Mapping
+        predicates:
+        - Path=/api/crops/**   
+      - id: OrderManagement
+        uri: http://localhost:9300/
+        predicates:
+        - Path=/api/dealer/**
+      - id: ProfileManagement
+        uri: http://localhost:9500
+        predicates:
+        - Path=/**
+ 
+  application:
+        name: crop-api-gateway
+        
